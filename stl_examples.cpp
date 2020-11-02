@@ -26,6 +26,22 @@ int fun2(const std::vector<int>& v){
                            );
 }
 
+int fun3(const std::vector<int>& v){
+    int result{};
+    for (const auto& el : v){
+        result = el%2 == 0 ? ++result : result;
+    }
+    return result;
+}
+
+int fun4(const std::vector<int>& v){
+    return std::count_if(v.begin(), 
+                         v.end(), 
+                         [](const auto& el){
+                             return el%2 == 0 ? 1 : 0;
+                             }
+                        );;
+}
 
 int main(){
 
@@ -37,6 +53,8 @@ int main(){
 
     std::cout<< "\n\nItems diveded by 2 (for_each) = " << fun1(v) << "\n";
     std::cout<< "Items diveded by 2 (accumulate) = " << fun2(v) <<"\n";
+    std::cout<< "Items diveded by 2 (range loop) = " << fun3(v) <<"\n";
+    std::cout<< "Items diveded by 2 (count_if) = " << fun4(v) <<"\n";
 
     return 0;
 }
