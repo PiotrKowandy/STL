@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <algorithm> //std::for_each
+#include <algorithm> //std::for_each, std::all_of
 #include <numeric> //std::accumulate
 
 int fun1(const std::vector<int>& v){
@@ -43,6 +43,12 @@ int fun4(const std::vector<int>& v){
                         );;
 }
 
+std::string fun5(const std::vector<int>& v){
+    return std::all_of(v.begin(), v.end(), [](const auto& el){return el%2 == 0;}) ? 
+        "every element is divided by 2" 
+        : "not every element is divided by 2";
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,32,88};
@@ -51,10 +57,11 @@ int main(){
         std::cout<<el << ", ";
     }
 
-    std::cout<< "\n\nItems diveded by 2 (for_each) = " << fun1(v) << "\n";
-    std::cout<< "Items diveded by 2 (accumulate) = " << fun2(v) <<"\n";
-    std::cout<< "Items diveded by 2 (range loop) = " << fun3(v) <<"\n";
-    std::cout<< "Items diveded by 2 (count_if) = " << fun4(v) <<"\n";
+    std::cout<< "\n\nItems divided by 2 (for_each) = " << fun1(v) << "\n";
+    std::cout<< "Items divided by 2 (accumulate) = " << fun2(v) <<"\n";
+    std::cout<< "Items divided by 2 (range loop) = " << fun3(v) <<"\n";
+    std::cout<< "Items divided by 2 (count_if) = " << fun4(v) <<"\n";
+    std::cout<< "Is every element divided by 2 (all_off) ? = " << fun5(v) <<"\n";
 
     return 0;
 }
