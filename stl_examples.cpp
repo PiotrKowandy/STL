@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if
+#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace
 #include <numeric> //std::accumulate
 
 int fun1(const std::vector<int>& v){
@@ -57,6 +57,10 @@ std::string fun6(const std::vector<int>& v, const int el){
     return *(std::find(v.begin(), v.end(), el)) ? "Yes, I found it;)" : "No, I didn't find it";
 }
 
+void fun7(std::vector<int>& v, const int old_el, const int new_el) {
+    std::replace(v.begin(), v.end(), old_el, new_el);
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
@@ -65,11 +69,15 @@ int main(){
         std::cout<<el << ", ";
     }
 
-    std::cout<< "\n\nItems divided by 2 (for_each) = " << fun1(v) << "\n";
-    std::cout<< "Items divided by 2 (accumulate) = " << fun2(v) <<"\n";
+    std::cout<< "\n\nItems divided by 2 (std::for_each) = " << fun1(v) << "\n";
+    std::cout<< "Items divided by 2 (std::accumulate) = " << fun2(v) <<"\n";
     std::cout<< "Items divided by 2 (range loop) = " << fun3(v) <<"\n";
-    std::cout<< "Items divided by 2 (count_if) = " << fun4_1(v) <<"\n";
-    std::cout<< "All items in vector contain 0 (count) = " << fun4_2(v, 0) <<"\n";
+    std::cout<< "Items divided by 2 (std::count_if) = " << fun4_1(v) <<"\n";
+    std::cout<< "All items in vector contain 0 (std::count) = " << fun4_2(v, 0) <<"\n";
+    fun7(v, 0, 333);
+    std::cout<< "Replace 0 with 333 in vector (std::replace) \n";
+    std::cout<< "All items in vector contain 0 (std::count) = " << fun4_2(v, 0) <<"\n";
+    std::cout<< "All items in vector contain 333 (std::count) = " << fun4_2(v, 333) <<"\n";
     std::cout<< "Is every element divided by 2 (all_off) ? = " << fun5(v) <<"\n";
     std::cout<< "Is there 11 in vector (std::find) ? = " << fun6(v, 11) << "\n";
 
