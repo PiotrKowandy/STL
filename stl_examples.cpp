@@ -1,7 +1,14 @@
 #include <vector>
 #include <iostream>
-#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace
+#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, std::swap
 #include <numeric> //std::accumulate
+
+void show_vector(const std::vector<int>& v){
+    for (auto&& el : v){
+        std::cout<< el << " ";
+    }
+    std::cout<< "\n";
+}
 
 int fun1(const std::vector<int>& v){
     int result{};
@@ -61,13 +68,15 @@ void fun7(std::vector<int>& v, const int old_el, const int new_el) {
     std::replace(v.begin(), v.end(), old_el, new_el);
 }
 
+void fun8(std::vector<int>& v, const int first, const int second){
+    std::swap(v[first], v[second]);
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
 
-    for (auto& el : v){
-        std::cout<<el << ", ";
-    }
+    show_vector(v);
 
     std::cout<< "\n\nItems divided by 2 (std::for_each) = " << fun1(v) << "\n";
     std::cout<< "Items divided by 2 (std::accumulate) = " << fun2(v) <<"\n";
@@ -80,6 +89,14 @@ int main(){
     std::cout<< "All items in vector contain 333 (std::count) = " << fun4_2(v, 333) <<"\n";
     std::cout<< "Is every element divided by 2 (all_off) ? = " << fun5(v) <<"\n";
     std::cout<< "Is there 11 in vector (std::find) ? = " << fun6(v, 11) << "\n";
+    std::cout<< "First element in vector is = " << *(v.begin()) << "\n";
+    std::cout<< "Last element in vector is = " << v[v.size()-1] << "\n";
+    std::cout<< "First and last element after std::swap: \n";
+    fun8(v, 0, v.size()-1);
+    std::cout<< "First element after swap in vector is = " << *(v.begin()) << "\n";
+    std::cout<< "Last element after swap in vector is = " << v[v.size()-1] << "\n";
+    
+    show_vector(v);
 
     return 0;
 }
