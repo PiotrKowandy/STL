@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
-#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, std::swap
+#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, 
+//std::swap, std::generate
 #include <numeric> //std::accumulate
 
 void show_vector(const std::vector<int>& v){
@@ -72,6 +73,12 @@ void fun8(std::vector<int>& v, const int first, const int second){
     std::swap(v[first], v[second]);
 }
 
+void fun9(std::vector<int>& v){
+    std::generate(v.begin(), v.end(), [n = 1]() mutable{
+        return n += n%2+n;
+    });
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
@@ -94,9 +101,15 @@ int main(){
     std::cout<< "First and last element after std::swap: \n";
     fun8(v, 0, v.size()-1);
     std::cout<< "First element after swap in vector is = " << *(v.begin()) << "\n";
-    std::cout<< "Last element after swap in vector is = " << v[v.size()-1] << "\n";
-    
+    std::cout<< "Last element after swap in vector is = " << v[v.size()-1] << "\n\n";
     show_vector(v);
+
+    std::cout<< "new vector with size 11: ";
+    std::vector<int> v2(11); //declared size of vector
+    show_vector(v2);
+    std::cout<< "Vector with generated elements: ";
+    fun9(v2);
+    show_vector(v2);
 
     return 0;
 }
