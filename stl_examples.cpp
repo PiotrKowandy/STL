@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, 
-//std::swap, std::generate
+//std::swap, std::generate, std::sort, std::is_sorted
 #include <numeric> //std::accumulate
 
 void show_vector(const std::vector<int>& v){
@@ -79,6 +79,14 @@ void fun9(std::vector<int>& v){
     });
 }
 
+void fun10(std::vector<int>& v){
+    std::sort(v.begin(), v.end());
+}
+
+std::string fun11(const std::vector<int>& v){
+    return std::is_sorted(v.begin(), v.end()) ? "yes, it's sorted" : "no, it's not sorted";
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
@@ -103,6 +111,11 @@ int main(){
     std::cout<< "First element after swap in vector is = " << *(v.begin()) << "\n";
     std::cout<< "Last element after swap in vector is = " << v[v.size()-1] << "\n\n";
     show_vector(v);
+    std::cout<< "Is vector is sorted ? " << fun11(v) << "\n";
+    std::cout<<"Vector after sorting: \n";
+    fun10(v);
+    show_vector(v);
+    std::cout<< "Is vector is sorted ? " << fun11(v) << "\n";
 
     std::cout<< "new vector with size 11: ";
     std::vector<int> v2(11); //declared size of vector
