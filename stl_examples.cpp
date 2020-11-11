@@ -1,6 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, 
+#include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, std::replace_if
 //std::swap, std::generate, std::sort, std::is_sorted
 #include <numeric> //std::accumulate
 
@@ -69,6 +69,14 @@ void fun7(std::vector<int>& v, const int old_el, const int new_el) {
     std::replace(v.begin(), v.end(), old_el, new_el);
 }
 
+auto f(int x){
+    return x == 333;
+}
+
+void fun7_2(std::vector<int>& v, const int el){
+    std::replace_if(v.begin(), v.end(), f, el);
+}
+
 void fun8(std::vector<int>& v, const int first, const int second){
     std::swap(v[first], v[second]);
 }
@@ -116,6 +124,11 @@ int main(){
     fun10(v);
     show_vector(v);
     std::cout<< "Is vector is sorted ? " << fun11(v) << "\n";
+    std::cout<< "Vector before replacing:\n";
+    show_vector(v);
+    std::cout<< "Vector after replacing: \n";
+    fun7_2(v, 11);
+    show_vector(v);
 
     std::cout<< "new vector with size 11: ";
     std::vector<int> v2(11); //declared size of vector
