@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, std::replace_if
-//std::swap, std::generate, std::sort, std::is_sorted
+//std::swap, std::generate, std::sort, std::is_sorted, std::remove, std::remove_if
 #include <numeric> //std::accumulate
 
 void show_vector(const std::vector<int>& v){
@@ -95,6 +95,14 @@ std::string fun11(const std::vector<int>& v){
     return std::is_sorted(v.begin(), v.end()) ? "yes, it's sorted" : "no, it's not sorted";
 }
 
+void fun12 (std::vector<int>& v, int el){
+    v.erase(std::remove(v.begin(), v.end(), el));
+}
+
+void fun12_2(std::vector<int>& v){
+    v.erase(std::remove_if(v.begin(), v.end(), [](int x){return x<400;}));
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
@@ -135,6 +143,14 @@ int main(){
     show_vector(v2);
     std::cout<< "Vector with generated elements: ";
     fun9(v2);
+    show_vector(v2);
+    std::cout<< "Element 511 will be erases.\n";
+    fun12(v2, 511);
+    std::cout<< "Vector without 511 element. \n";
+    show_vector(v2);
+    std::cout<< "Elements lower than 400 will be remove.\n";
+    fun12_2(v2);
+    std::cout<< "Vector after removing.\n";
     show_vector(v2);
 
     return 0;
