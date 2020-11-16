@@ -1,7 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm> //std::for_each, std::all_of, std::find, std::count, std::count_if, std::replace, std::replace_if
-//std::swap, std::generate, std::sort, std::is_sorted, std::remove, std::remove_if, std::equal, std::reverse
+//std::swap, std::generate, std::sort, std::is_sorted, std::remove, std::remove_if, std::equal, std::reverse, std::copy
 #include <numeric> //std::accumulate
 
 void show_vector(const std::vector<int>& v){
@@ -108,6 +108,12 @@ std::string are_they_same(std::string s1, std::string s2){
     return std::equal(s1.begin(), s1.end(), s2.begin(), s2.end()) ? "Yes" : "No";
 }
 
+auto fun13(std::vector<int>&v){
+    std::vector<int> temp(v.size());
+    std::copy(v.begin(), v.end(), temp.begin());
+    return temp;
+}
+
 int main(){
 
     std::vector<int> v{3,6,2,0,5,7,11,34,0,32,88};
@@ -157,6 +163,10 @@ int main(){
     fun12_2(v2);
     std::cout<< "Vector after removing.\n";
     show_vector(v2);
+
+    auto v3 = fun13(v2);
+    std::cout<< "New vector v3 created by copy from v2: \n";
+    show_vector(v3);
 
     std::cout<< "test and reverse of tset are the same? :" << are_they_same("test", "tset") << "\n";
 
